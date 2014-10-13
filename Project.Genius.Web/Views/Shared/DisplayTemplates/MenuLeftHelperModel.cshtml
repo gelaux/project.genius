@@ -1,0 +1,18 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.MenuHelperModel
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+<ul class="nav main-menu">
+    @foreach (var node in Model.Nodes)
+    {
+        if (node.Title != "Home")
+        {
+            <li class=@(node.IsCurrentNode ? "active" : "treeview")>
+                <a href=@node.Url>
+                    <i class="fa @node.Attributes["fa"].ToString()"></i>
+                    <span class="hidden-sm text">@node.Title</span>
+                </a>
+            </li>
+        }
+    }
+</ul>
