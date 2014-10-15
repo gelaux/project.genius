@@ -2,7 +2,6 @@
 {
 	using System.Data.Entity;
 	using System.Data.Entity.ModelConfiguration.Conventions;
-	using System.Threading.Tasks;
 
 	using Entities;
 
@@ -23,9 +22,11 @@
 
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
+		public DbSet<DefinedTask> DefinedTasks { get; set; }
+
 		public DbSet<Module> Modules { get; set; }
 
-		public DbSet<DefinedTask> DefinedTasks { get; set; }
+		public DbSet<ProductVersion> ProductVersions { get; set; }
 
 		#endregion
 

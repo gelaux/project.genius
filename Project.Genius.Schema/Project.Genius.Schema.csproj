@@ -56,6 +56,7 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\DefinedTask.cs" />
     <Compile Include="Entities\Module.cs" />
+    <Compile Include="Entities\ProductVersion.cs" />
     <Compile Include="Migrations\201410140103054_InitialCommit.cs" />
     <Compile Include="Migrations\201410140103054_InitialCommit.Designer.cs">
       <DependentUpon>201410140103054_InitialCommit.cs</DependentUpon>
@@ -63,6 +64,14 @@
     <Compile Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.cs" />
     <Compile Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.Designer.cs">
       <DependentUpon>201410150251073_AddModuleAndDefinedTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.cs" />
+    <Compile Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.Designer.cs">
+      <DependentUpon>201410150459172_UpdatedModuleTableWithModuleType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs" />
+    <Compile Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.Designer.cs">
+      <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +89,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.resx">
       <DependentUpon>201410150251073_AddModuleAndDefinedTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.resx">
+      <DependentUpon>201410150459172_UpdatedModuleTableWithModuleType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.resx">
+      <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

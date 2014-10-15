@@ -12,6 +12,20 @@
                     <i class="fa @node.Attributes["fa"].ToString()"></i>
                     <span class="hidden-sm text">@node.Title</span>
                 </a>
+                @if (node.Children.Any())
+                {
+                <ul>
+                    @foreach (var child in node.Children)
+                    {
+                        <li>
+                            <a class="submenu" href="@child.Url">
+                                <i class="fa @child.Attributes["fa"].ToString()"></i>
+                                <span class="hidden-sm text">@child.Title</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                }
             </li>
         }
     }

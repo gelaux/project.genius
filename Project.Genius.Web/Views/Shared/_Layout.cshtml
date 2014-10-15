@@ -32,16 +32,16 @@
             <div class="row">
             
                 <!-- start: Side Menu -->
-                <div id="sidebar-left" class="col-lg-2 col-sm-1">
+                <div id="sidebar-left" class="col-lg-2 col-sm-1 minified">
                     <div class="sidebar-nav nav-collapse collapse navbar-collapse">
                         @Html.MvcSiteMap().Menu("MenuLeftHelperModel")
                     </div>
-                    <a href="#" id="main-menu-min" class="full visible-md visible-lg"><i class="fa fa-angle-double-left"></i></a>
+                    <a href="#" id="main-menu-min" class="minified visible-md visible-lg"><i class="fa fa-angle-double-right"></i></a>
                 </div>
                 <!-- end: Side Menu -->
             
                 <!-- start: Content -->
-                <div id="content" class="col-lg-10 col-sm-11">
+                <div id="content" class="col-lg-10 col-sm-11 sidebar-minified">
                     <div class="row">
                         @Html.MvcSiteMap().SiteMapPath("SiteMapPathBreadcrumbHelperModel")
                     </div>
