@@ -1,22 +1,44 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using Project.Genius.Schema
+@using Project.Genius.Schema.Entities
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        <ul class="nav navbar-nav pull-right">
+            @{
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new DataContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+            }
+            <li class="dropdown">
+                <a class="btn account dropdown-toggle" data-toggle="dropdown" href="#">
+                    <div class="avatar">
+                        @Html.Gravatar(currentUser.Email, 40, GravatarHelper.DefaultImageWavatar)
+                    </div>
+                    <div class="user">
+                        <span class="hello">Welcome!</span>
+                        <span class="name">@currentUser.FirstName @currentUser.LastName</span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="index.html#"><i class="fa fa-user"></i> Profile</a></li>
+                    <li><a href="index.html#"><i class="fa fa-cog"></i> Settings</a></li>
+                    <li><a href="index.html#"><i class="fa fa-envelope"></i> Messages</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                </ul>
+            </li>
+            
+        </ul>
     }
 }
-else
+@*else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
-}
+}*@

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Project Genius</title>
+    <title>@ViewBag.Title - GENiUS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -19,28 +19,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a id="main-menu-toggle" class="hidden-xs open"><i class="fa fa-bars"></i></a>
-                <a class="navbar-brand col-md-2 col-sm-1 col-xs-2" href="@Url.Action("Index", "Home")"><span>Project Genius</span></a>
+                <a class="navbar-brand col-md-2 col-sm-1 col-xs-2" href="@Url.Action("Index", "Home")"><span>GENiUS</span></a>
 
                 <div class="header-nav">
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="dropdown">
-                            <a class="btn account dropdown-toggle" data-toggle="dropdown" href="index.html#">
-                                <div class="avatar">
-                                    @Html.Gravatar("rsalayo@openit.com", 40, GravatarHelper.DefaultImageWavatar)
-                                </div>
-                                <div class="user">
-                                    <span class="hello">Welcome!</span>
-                                    <span class="name">Romeo Salayo</span>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="index.html#"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="index.html#"><i class="fa fa-cog"></i> Settings</a></li>
-                                <li><a href="index.html#"><i class="fa fa-envelope"></i> Messages</a></li>
-                                <li><a href="page-login.html"><i class="fa fa-off"></i> Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </header>
@@ -53,10 +35,6 @@
                 <div id="sidebar-left" class="col-lg-2 col-sm-1">
                     <div class="sidebar-nav nav-collapse collapse navbar-collapse">
                         @Html.MvcSiteMap().Menu("MenuLeftHelperModel")
-                        @*<ul class="nav main-menu">
-                            <li><a href="index.html"><i class="fa fa-bar-chart-o"></i><span class="hidden-sm text"> Dashboard</span></a></li>
-                            <li><a href="widgets.html"><i class="fa fa-dashboard"></i><span class="hidden-sm text"> Widgets</span></a></li>
-                        </ul>*@
                     </div>
                     <a href="#" id="main-menu-min" class="full visible-md visible-lg"><i class="fa fa-angle-double-left"></i></a>
                 </div>
@@ -64,7 +42,12 @@
             
                 <!-- start: Content -->
                 <div id="content" class="col-lg-10 col-sm-11">
-                    @RenderBody()
+                    <div class="row">
+                        @Html.MvcSiteMap().SiteMapPath("SiteMapPathBreadcrumbHelperModel")
+                    </div>
+                    <div class="row">
+                        @RenderBody()
+                    </div>
                 </div>
                 <!-- end: Content-->
             </div>

@@ -30,7 +30,8 @@ namespace Project.Genius.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
 					  "~/Content/font-awesome.css",
-                      "~/Content/style.css"));
+                      "~/Content/style.css",
+					  "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

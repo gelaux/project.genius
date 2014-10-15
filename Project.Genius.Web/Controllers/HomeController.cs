@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Project.Genius.Web.Controllers
+﻿namespace Project.Genius.Web.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+	using System.Web.Mvc;
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+	[Authorize]
+	public class HomeController : Controller
+	{
+		#region Public Methods
 
-            return View();
-        }
+		public ActionResult About()
+		{
+			this.ViewBag.Message = "Your application description page.";
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+			return this.View();
+		}
 
-            return View();
-        }
-    }
+		public ActionResult Contact()
+		{
+			this.ViewBag.Message = "Your contact page.";
+
+			return this.View();
+		}
+
+		public ActionResult Index()
+		{
+			return this.View();
+		}
+
+		#endregion
+	}
 }
