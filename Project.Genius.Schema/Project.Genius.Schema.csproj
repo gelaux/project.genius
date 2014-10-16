@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.Designer.cs">
       <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.cs" />
+    <Compile Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.Designer.cs">
+      <DependentUpon>201410152115228_UpdatedModuleTableToAddCaptionField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.resx">
       <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.resx">
+      <DependentUpon>201410152115228_UpdatedModuleTableToAddCaptionField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

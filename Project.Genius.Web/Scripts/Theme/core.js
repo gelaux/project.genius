@@ -605,7 +605,7 @@ function widthFunctions(e) {
 		}
 		
 		if (winHeight - 80 > contentHeight) {
-			$('#content').css('min-height',winHeight-headerHeight-footerHeight);
+		    $('#content').css('min-height', winHeight - headerHeight - footerHeight);
 		}
 				
 	} else {

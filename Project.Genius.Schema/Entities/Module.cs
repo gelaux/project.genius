@@ -23,6 +23,8 @@
 
 		#region Properties
 
+		public string Caption { get; set; }
+
 		public string Description { get; set; }
 
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]

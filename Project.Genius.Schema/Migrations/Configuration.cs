@@ -52,6 +52,7 @@ namespace Project.Genius.Schema.Migrations
 				{
 					Name = "Base Pro",
 					Type = Module.ModuleType.Server,
+					Caption = "Install OpeniT Core Server",
 					Description = "OpeniT Base Professional",
 					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
 				},
@@ -59,6 +60,7 @@ namespace Project.Genius.Schema.Migrations
 				{
 					Name = "Base Enterprise",
 					Type = Module.ModuleType.Server,
+					Caption = "Install OpeniT Analysis Server",
 					Description = "OpeniT Base Enterprise",
 					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
 				},
@@ -66,6 +68,7 @@ namespace Project.Genius.Schema.Migrations
 				{
 					Name = "LicenseAnalyzer",
 					Type = Module.ModuleType.Client,
+					Caption = "Install OpeniT LicenseAnalyzer Client",
 					Description = "OpeniT Collector [LicenseAnalyzer]",
 					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
 				});
