@@ -12,13 +12,14 @@ function inboxWidthFunctions(e) {
 	}
 }
 
-function editableFunctions() {
-    
+function activatEditableFunctions() {
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.showbuttons = false;
+    $('.editable').editable();
 };
 
 $(window).bind("resize", inboxWidthFunctions);
 
 $(document).ready(function(){
     inboxWidthFunctions();
-    $('#modelCaption').editableFunctions();
 });

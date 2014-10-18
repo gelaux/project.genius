@@ -1,35 +1,38 @@
-﻿@model Project.Genius.Schema.Entities.Module
+﻿@using Project.Genius.Schema.Entities
+@model Module
 
-<div class="box">
+@*<div class="box">
     <div class="box-header">
         <h2>
             <i class="fa fa-list-alt"></i>
             @Model.Name
         </h2>
-    </div>
+    </div>*@
     <div class="box-content">
         <table class="table table-bordered modules">
             <tr>
                 <th class="header">Caption</th>
                 <td colspan="4">
-                    <div id="modelCaption">@Html.DisplayFor(model => model.Caption)</div>
+                    <a href="javascript:void(0)" class="editable" data-type="text" data-title="Enter Caption">@Html.DisplayFor(model => model.Caption)</a>
                 </td>
             </tr>
             <tr>
                 <th class="header">Description</th>
-                <td colspan="4">@Html.DisplayFor(model => model.Description)</td>
+                <td colspan="4">
+                    <a href="javascript:void(0)" class="editable" data-type="text">@Html.DisplayFor(model => model.Description)</a>
+                </td>
             </tr>
             <tr>
                 <th class="header">Author</th>
-                <td colspan="4">@Html.DisplayFor(model => model.Owner.FirstName)</td>
+                <td colspan="4">@Html.DisplayFor(model => model.CreateBy.FirstName)</td>
             </tr>
-        @*</table>
-        <table class="table table-bordered modules">*@
             <tr>
                 <th class="header">Optional</th>
                 <td>@Html.DisplayFor(model => model.Optional)</td>
                 <th class="header">Type</th>
-                <td>@Html.DisplayFor(model => model.Type)</td>
+                <td>
+                    <a href="javascript:void(0)" class="editable" data-type="select" data-source="modules/gettypes" data-value="@Model.Type.Id" data-pk="@Model.Id">@Html.DisplayFor(model => model.Type.Name)</a>
+                </td>
             </tr>
             @*<tr>
                 <td class="details">Type</td>
@@ -37,4 +40,29 @@
             </tr>*@
         </table>
     </div>
+@*</div>*@
+@*<div class="box">
+    <div class="box-header">
+        <h2>
+            <i class="fa fa-tasks"></i>
+            Template
+        </h2>
+    </div>
+    <div class="box-content">
+        
+    </div>
+</div>*@
+<div class="well">
+    <ul>
+        @foreach (var module in Model.Tasks)
+        {
+            <li>@module.Name</li>
+        }
+    </ul>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        activatEditableFunctions();
+    });
+</script>

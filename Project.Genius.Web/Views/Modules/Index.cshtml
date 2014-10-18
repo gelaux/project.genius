@@ -6,7 +6,7 @@
 }
 
 <div class="row page-todo">
-    <div class="col-sm-4 tasks">
+    <div class="col-sm-3 tasks">
         <div class="task-list">
             <p>
                 @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success"} )
@@ -40,7 +40,7 @@
                                                 UpdateTargetId = "moduleDetails"
                                             })
                                     </span>
-                                    <span class="label label-info">@module.Type</span>
+                                    <span class="label label-info">@module.Type.Name</span>
                                     <a class="remove" href="#">
                                         <i class="fa fa-times"></i>
                                     </a>
@@ -52,9 +52,11 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-8 message">
-        <div id="moduleDetails">
-            @*@Html.Partial("_Details", ModuleHandle.)*@
+    <div class="col-sm-9 tasks">
+        <div class="task-list">
+            <div id="moduleDetails">
+                @*@Html.Partial("_Details", ModuleHandle.)*@
+            </div>
         </div>
     </div>
 </div>

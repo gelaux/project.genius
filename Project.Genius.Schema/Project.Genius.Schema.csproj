@@ -56,26 +56,15 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\DefinedTask.cs" />
     <Compile Include="Entities\Module.cs" />
+    <Compile Include="Entities\ModuleType.cs" />
     <Compile Include="Entities\ProductVersion.cs" />
     <Compile Include="Migrations\201410140103054_InitialCommit.cs" />
     <Compile Include="Migrations\201410140103054_InitialCommit.Designer.cs">
       <DependentUpon>201410140103054_InitialCommit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.cs" />
-    <Compile Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.Designer.cs">
-      <DependentUpon>201410150251073_AddModuleAndDefinedTaskTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.cs" />
-    <Compile Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.Designer.cs">
-      <DependentUpon>201410150459172_UpdatedModuleTableWithModuleType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs" />
-    <Compile Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.Designer.cs">
-      <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.cs" />
-    <Compile Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.Designer.cs">
-      <DependentUpon>201410152115228_UpdatedModuleTableToAddCaptionField.cs</DependentUpon>
+    <Compile Include="Migrations\201410180831507_AddedModuleRelatedTables.cs" />
+    <Compile Include="Migrations\201410180831507_AddedModuleRelatedTables.Designer.cs">
+      <DependentUpon>201410180831507_AddedModuleRelatedTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,17 +80,8 @@
     <EmbeddedResource Include="Migrations\201410140103054_InitialCommit.resx">
       <DependentUpon>201410140103054_InitialCommit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410150251073_AddModuleAndDefinedTaskTable.resx">
-      <DependentUpon>201410150251073_AddModuleAndDefinedTaskTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410150459172_UpdatedModuleTableWithModuleType.resx">
-      <DependentUpon>201410150459172_UpdatedModuleTableWithModuleType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.resx">
-      <DependentUpon>201410150546314_UpdatedModuleTableWithOptionalAndProductVersion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410152115228_UpdatedModuleTableToAddCaptionField.resx">
-      <DependentUpon>201410152115228_UpdatedModuleTableToAddCaptionField.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410180831507_AddedModuleRelatedTables.resx">
+      <DependentUpon>201410180831507_AddedModuleRelatedTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

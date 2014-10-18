@@ -1,15 +1,15 @@
 ﻿namespace Project.Genius.Web.Controllers
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Data.Entity;
+	using System.Linq;
 	using System.Net;
 	using System.Threading.Tasks;
 	using System.Web.Mvc;
 
 	using Schema;
 	using Schema.Entities;
-
-	using ViewModels;
 
 	public class ModulesController : Controller
 	{
@@ -18,8 +18,6 @@
 		private readonly DataContext db = new DataContext();
 
 		#endregion
-
-		// GET: Modules
 
 		// GET: Modules/Create
 
@@ -88,7 +86,7 @@
 			{
 				return this.HttpNotFound();
 			}
-			return PartialView("_Details", module);
+			return this.PartialView("_Details", module);
 		}
 
 		public async Task<ActionResult> Edit(Guid? id)
@@ -119,6 +117,14 @@
 				return this.RedirectToAction("Index");
 			}
 			return View(module);
+		}
+
+		public JsonResult GetTypes()
+		{
+			List<ModuleType> dbResult = this.db.ModuleTypes.ToList();
+			var types = (from type in dbResult select new { value = type.Id, text = type.Name });
+
+			return this.Json(types, JsonRequestBehavior.AllowGet);
 		}
 
 		public async Task<ActionResult> Index()

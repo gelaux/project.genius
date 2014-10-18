@@ -7,7 +7,7 @@
 	{
 		#region Properties
 
-		public float Duration { get; set; }
+		public double Duration { get; set; }
 
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public Guid Id { get; set; }

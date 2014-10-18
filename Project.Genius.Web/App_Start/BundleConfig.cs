@@ -20,6 +20,7 @@ namespace Project.Genius.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
+					  "~/Scripts/bootstrap-editable.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/theme").Include(
@@ -34,6 +35,7 @@ namespace Project.Genius.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+					  "~/Content/bootstrap-editable.css",
 					  "~/Content/font-awesome.css",
                       "~/Content/style.css",
 					  "~/Content/site.css"));

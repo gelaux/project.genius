@@ -18,3 +18,17 @@
 .todo ul li {
     font-size: 13px;
 }
+
+.editable-click {
+    border-bottom: none !important;
+}
+
+.editable-input > input {
+    height: 20px !important;
+    width: 250px !important;
+}
+
+.editable-input > select {
+    height: 20px !important;
+    width: 150px !important;
+}

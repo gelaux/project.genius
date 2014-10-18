@@ -26,17 +26,6 @@ namespace Project.Genius.Schema.Migrations
 		{
 			//  This method will be called after migrating to the latest version.
 
-			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-			//  to avoid creating duplicate seed data. E.g.
-			//
-			//    context.People.AddOrUpdate(
-			//      p => p.FullName,
-			//      new Person { FullName = "Andrew Peters" },
-			//      new Person { FullName = "Brice Lambson" },
-			//      new Person { FullName = "Rowan Miller" }
-			//    );
-			//
-
 			if (!context.ApplicationUsers.Any(u => u.UserName == "rsalayo@openit.com"))
 			{
 				var store = new UserStore<ApplicationUser>(context);
@@ -46,32 +35,90 @@ namespace Project.Genius.Schema.Migrations
 				manager.Create(user, "admin");
 			}
 
+			ApplicationUser createBy = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com");
+
+			context.ModuleTypes.AddOrUpdate(
+				t => t.Name,
+				new ModuleType { Name = "Server", },
+				new ModuleType { Name = "Client", },
+				new ModuleType { Name = "Single Feature", });
+
+			context.SaveChanges();
+
 			context.Modules.AddOrUpdate(
 				m => m.Name,
 				new Module
 				{
-					Name = "Base Pro",
-					Type = Module.ModuleType.Server,
+					Name = "Base Professional",
+					Type = context.ModuleTypes.FirstOrDefault(),
 					Caption = "Install OpeniT Core Server",
 					Description = "OpeniT Base Professional",
-					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
+					CreateBy = createBy,
+					CreatedOn = DateTime.Now,
+					UpdateBy = createBy,
+					UpdateOn = DateTime.Now
 				},
 				new Module
 				{
 					Name = "Base Enterprise",
-					Type = Module.ModuleType.Server,
+					Type = context.ModuleTypes.FirstOrDefault(t => t.Name == "Server"),
 					Caption = "Install OpeniT Analysis Server",
 					Description = "OpeniT Base Enterprise",
-					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
+					CreateBy = createBy,
+					CreatedOn = DateTime.Now,
+					UpdateBy = createBy,
+					UpdateOn = DateTime.Now
 				},
 				new Module
 				{
 					Name = "LicenseAnalyzer",
-					Type = Module.ModuleType.Client,
+					Type = context.ModuleTypes.FirstOrDefault(t => t.Name == "Client"),
 					Caption = "Install OpeniT LicenseAnalyzer Client",
 					Description = "OpeniT Collector [LicenseAnalyzer]",
-					Owner = context.ApplicationUsers.FirstOrDefault(u => u.UserName == "rsalayo@openit.com")
+					CreateBy = createBy,
+					CreatedOn = DateTime.Now,
+					UpdateBy = createBy,
+					UpdateOn = DateTime.Now
+				},
+				new Module
+				{
+					Name = "Petrel Module Logging",
+					Type = context.ModuleTypes.FirstOrDefault(t => t.Name == "Single Feature"),
+					Caption = "Install OpeniT SystemAnalyzer Client",
+					Description = "OpeniT Collector [SystemAnalyzer]",
+					CreateBy = createBy,
+					CreatedOn = DateTime.Now,
+					UpdateBy = createBy,
+					UpdateOn = DateTime.Now
 				});
+
+			context.SaveChanges();
+
+			context.DefinedTasks.AddOrUpdate(
+				t => t.Name,
+				new DefinedTask
+				{
+					Name = "Install OpeniT CoreServer",
+					Duration = 1,
+					Module = context.Modules.FirstOrDefault(m => m.Name == "Base Professional"),
+					Owner = createBy
+				},
+				new DefinedTask
+				{
+					Name = "Install OpeniT License File",
+					Duration = .25,
+					Module = context.Modules.FirstOrDefault(m => m.Name == "Base Professional"),
+					Owner = createBy
+				},
+				new DefinedTask
+				{
+					Name = "Configure OpeniT CoreServer",
+					Duration = 1,
+					Module = context.Modules.FirstOrDefault(m => m.Name == "Base Professional"),
+					Owner = createBy
+				});
+
+			context.SaveChanges();
 
 			context.ProductVersions.AddOrUpdate(
 				v => v.Name,

@@ -24,6 +24,8 @@
 
 		public DbSet<DefinedTask> DefinedTasks { get; set; }
 
+		public DbSet<ModuleType> ModuleTypes { get; set; }
+
 		public DbSet<Module> Modules { get; set; }
 
 		public DbSet<ProductVersion> ProductVersions { get; set; }
