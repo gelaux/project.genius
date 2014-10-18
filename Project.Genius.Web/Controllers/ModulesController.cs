@@ -9,6 +9,8 @@
 	using Schema;
 	using Schema.Entities;
 
+	using ViewModels;
+
 	public class ModulesController : Controller
 	{
 		#region Constants and Fields
@@ -86,7 +88,7 @@
 			{
 				return this.HttpNotFound();
 			}
-			return View(module);
+			return PartialView("_Details", module);
 		}
 
 		public async Task<ActionResult> Edit(Guid? id)
@@ -121,6 +123,11 @@
 
 		public async Task<ActionResult> Index()
 		{
+			//var viewModel = new ModuleViewModel
+			//{
+			//	DefinedTask = await this.db.DefinedTasks.ToListAsync(),
+			//	Module = await this.db.Modules.ToListAsync()
+			//};
 			return this.View(await this.db.Modules.ToListAsync());
 		}
 

@@ -1,0 +1,40 @@
+﻿@model Project.Genius.Schema.Entities.Module
+
+<div class="box">
+    <div class="box-header">
+        <h2>
+            <i class="fa fa-list-alt"></i>
+            @Model.Name
+        </h2>
+    </div>
+    <div class="box-content">
+        <table class="table table-bordered modules">
+            <tr>
+                <th class="header">Caption</th>
+                <td colspan="4">
+                    <div id="modelCaption">@Html.DisplayFor(model => model.Caption)</div>
+                </td>
+            </tr>
+            <tr>
+                <th class="header">Description</th>
+                <td colspan="4">@Html.DisplayFor(model => model.Description)</td>
+            </tr>
+            <tr>
+                <th class="header">Author</th>
+                <td colspan="4">@Html.DisplayFor(model => model.Owner.FirstName)</td>
+            </tr>
+        @*</table>
+        <table class="table table-bordered modules">*@
+            <tr>
+                <th class="header">Optional</th>
+                <td>@Html.DisplayFor(model => model.Optional)</td>
+                <th class="header">Type</th>
+                <td>@Html.DisplayFor(model => model.Type)</td>
+            </tr>
+            @*<tr>
+                <td class="details">Type</td>
+                <td>@Html.DisplayFor(model => model.Type)</td>
+            </tr>*@
+        </table>
+    </div>
+</div>

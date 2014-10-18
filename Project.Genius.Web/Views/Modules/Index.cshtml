@@ -9,7 +9,7 @@
     <div class="col-sm-4 tasks">
         <div class="task-list">
             <p>
-                @Html.ActionLink("New Module", "Create", "Module", new { @class = "btn btn-success"} )
+                @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success"} )
             </p>
             <div class="box">
                 <div class="box-header">
@@ -20,15 +20,25 @@
                 </div>
                 <div class="box-content">
                     <div class="todo">
-                        <ul class="todo-list">
+                        <ul class="todo-list font-size-twelve">
                             @foreach (var module in Model)
                             {
                                 <li data-id="@module.Id">
                                     <span class="todo-actions">
-                                        <i class="fa fa-hand-o-right"></i>
+                                        <i class="fa fa-list-alt"></i>
                                     </span>
                                     <span class="desc">
-                                        <a href="#">@module.Name</a>
+                                        @Ajax.ActionLink(
+                                            @module.Name,
+                                            "Details",
+                                            new {
+                                                id = @module.Id
+                                            },
+                                            new AjaxOptions {
+                                                HttpMethod = "get",
+                                                InsertionMode = InsertionMode.Replace,
+                                                UpdateTargetId = "moduleDetails"
+                                            })
                                     </span>
                                     <span class="label label-info">@module.Type</span>
                                     <a class="remove" href="#">
@@ -43,7 +53,9 @@
         </div>
     </div>
     <div class="col-sm-8 message">
-        
+        <div id="moduleDetails">
+            @*@Html.Partial("_Details", ModuleHandle.)*@
+        </div>
     </div>
 </div>
 

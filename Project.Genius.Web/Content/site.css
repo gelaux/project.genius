@@ -1,7 +1,20 @@
-﻿.bg-black {
+﻿body {
+    font-size: 13px !important;
+}
+
+.bg-black {
     background-color: #222222 !important;
 }
 
 .bg-olive {
     background-color: #3d9970 !important;
+}
+
+.modules tr > th {
+    width: 150px !important;
+    background-color: #EEE !important;
+}
+
+.todo ul li {
+    font-size: 13px;
 }

@@ -3457,14 +3457,14 @@ table.table-clear td {
 }
 table.small-font {
   font-size: 12px;
-}
+}.table-bordered > tbody > tr > th,
 .table thead > tr > th,
 .table tbody > tr > th,
 .table tfoot > tr > th,
 .table thead > tr > td,
 .table tbody > tr > td,
 .table tfoot > tr > td {
-  padding: 8px;
+  padding: 4px .5em;
   line-height: 1.428571429;
   vertical-align: top;
   border-top: 1px solid #e9ebec;
@@ -3482,7 +3482,7 @@ table.small-font {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #e9ebec;
+  border: 1px solid #cdcdcd;
 }
 /* Skill Bars
 =================================================================== */
