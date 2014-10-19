@@ -62,9 +62,9 @@
     <Compile Include="Migrations\201410140103054_InitialCommit.Designer.cs">
       <DependentUpon>201410140103054_InitialCommit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410180831507_AddedModuleRelatedTables.cs" />
-    <Compile Include="Migrations\201410180831507_AddedModuleRelatedTables.Designer.cs">
-      <DependentUpon>201410180831507_AddedModuleRelatedTables.cs</DependentUpon>
+    <Compile Include="Migrations\201410190127249_AddedModuleRelatedTables.cs" />
+    <Compile Include="Migrations\201410190127249_AddedModuleRelatedTables.Designer.cs">
+      <DependentUpon>201410190127249_AddedModuleRelatedTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,8 +80,8 @@
     <EmbeddedResource Include="Migrations\201410140103054_InitialCommit.resx">
       <DependentUpon>201410140103054_InitialCommit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201410180831507_AddedModuleRelatedTables.resx">
-      <DependentUpon>201410180831507_AddedModuleRelatedTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410190127249_AddedModuleRelatedTables.resx">
+      <DependentUpon>201410190127249_AddedModuleRelatedTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,64 +1,77 @@
 ﻿@using Project.Genius.Schema.Entities
 @model Module
 
-@*<div class="box">
-    <div class="box-header">
-        <h2>
-            <i class="fa fa-list-alt"></i>
-            @Model.Name
-        </h2>
-    </div>*@
-    <div class="box-content">
-        <table class="table table-bordered modules">
-            <tr>
-                <th class="header">Caption</th>
-                <td colspan="4">
-                    <a href="javascript:void(0)" class="editable" data-type="text" data-title="Enter Caption">@Html.DisplayFor(model => model.Caption)</a>
-                </td>
-            </tr>
-            <tr>
-                <th class="header">Description</th>
-                <td colspan="4">
-                    <a href="javascript:void(0)" class="editable" data-type="text">@Html.DisplayFor(model => model.Description)</a>
-                </td>
-            </tr>
-            <tr>
-                <th class="header">Author</th>
-                <td colspan="4">@Html.DisplayFor(model => model.CreateBy.FirstName)</td>
-            </tr>
-            <tr>
-                <th class="header">Optional</th>
-                <td>@Html.DisplayFor(model => model.Optional)</td>
-                <th class="header">Type</th>
-                <td>
-                    <a href="javascript:void(0)" class="editable" data-type="select" data-source="modules/gettypes" data-value="@Model.Type.Id" data-pk="@Model.Id">@Html.DisplayFor(model => model.Type.Name)</a>
-                </td>
-            </tr>
-            @*<tr>
-                <td class="details">Type</td>
-                <td>@Html.DisplayFor(model => model.Type)</td>
-            </tr>*@
-        </table>
-    </div>
-@*</div>*@
-@*<div class="box">
-    <div class="box-header">
-        <h2>
-            <i class="fa fa-tasks"></i>
-            Template
-        </h2>
-    </div>
-    <div class="box-content">
-        
-    </div>
-</div>*@
+<h1>@Model.Name</h1>
+<table class="table table-bordered modules">
+    <tr>
+        <th class="header">Caption</th>
+        <td colspan="4">
+            <a href="javascript:void(0)"
+                class="editable"
+                data-type="text"
+                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-name="Caption"
+                data-pk="@Model.Id">@Model.Caption</a>
+        </td>
+    </tr>
+    <tr>
+        <th class="header">Description</th>
+        <td colspan="4">
+            <a href="javascript:void(0)"
+                class="editable"
+                data-type="text"
+                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-name="Description"
+                data-pk="@Model.Id">@Model.Description</a>
+        </td>
+    </tr>
+    <tr>
+        <th class="col-lg-1 col-sm-2">Type</th>
+        <td class="col-sm-4">
+            <a href="javascript:void(0)"
+                class="editable"
+                data-type="select"
+                data-source="@Url.Action("GetTypes", "Modules")"
+                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-value="@Model.Type.Id"
+                data-name="Type"
+                data-pk="@Model.Id">@Model.Type.Name</a>
+        </td>
+        <th class="col-lg-1 col-sm-2">Optional</th>
+        <td class="col-sm-4">@Html.DisplayFor(model => model.Optional)</td>
+    </tr>
+    <tr>
+        <th class="col-lg-1 col-sm-2">Created By</th>
+        <td class="col-sm-4">@Model.CreateBy.DisplayName</td>
+        <th class="col-lg-1 col-sm-2">Created On</th>
+        <td class="col-sm-4">@Model.CreatedOn</td>
+    </tr>
+    <tr>
+        <th class="col-lg-1 col-sm-2">Updated By</th>
+        <td class="col-sm-4">@Model.UpdateBy.DisplayName</td>
+        <th class="col-lg-1 col-sm-2">Updated On</th>
+        <td class="col-sm-4">@Model.UpdateOn</td>
+    </tr>
+</table>
+
 <div class="well">
-    <ul>
-        @foreach (var module in Model.Tasks)
-        {
-            <li>@module.Name</li>
-        }
-    </ul>
+    <div class="col-sm-6">
+        @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-sm btn-inverse" })
+    </div>
+    <div id="moduleTasks" class="dd">
+        <ol class="dd-list">
+            @foreach (var module in Model.Tasks)
+            {
+                <li class="dd-item dd3-item">
+                    <div class="dd-handle dd3-handle">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <div class="dd3-content">@module.Name</div>
+                </li>
+            }
+        </ol>
+    </div>
+    <div class="clearfix"></div>
 </div>
 
 <script type="text/javascript">

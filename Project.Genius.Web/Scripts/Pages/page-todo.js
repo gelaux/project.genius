@@ -16,6 +16,12 @@ function activatEditableFunctions() {
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.showbuttons = false;
     $('.editable').editable();
+
+    var tasks = $('#moduleTasks')
+    .nestable()
+    .on('change', function() {
+        alert(window.JSON.stringify(tasks.nestable('serialize')));
+    });
 };
 
 $(window).bind("resize", inboxWidthFunctions);

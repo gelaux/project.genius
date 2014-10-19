@@ -11,7 +11,6 @@
 }
 
 .modules tr > th {
-    width: 150px !important;
     background-color: #EEE !important;
 }
 
@@ -19,9 +18,13 @@
     font-size: 13px;
 }
 
-.editable-click {
-    border-bottom: none !important;
+.page-todo .task-list {
+    padding: 15px 15px !important;
 }
+
+/*.editable-click {
+    border-bottom: none !important;
+}*/
 
 .editable-input > input {
     height: 20px !important;
@@ -31,4 +34,9 @@
 .editable-input > select {
     height: 20px !important;
     width: 150px !important;
+}
+
+.form-control {
+    padding: 0;
+    font-size: 13px;
 }

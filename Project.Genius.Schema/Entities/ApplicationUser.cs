@@ -11,6 +11,14 @@
 	{
 		#region Properties
 
+		public string DisplayName
+		{
+			get
+			{
+				return string.Format("{0} {1}", this.FirstName, this.LastName);
+			}
+		}
+
 		public string FirstName { get; set; }
 
 		public string LastName { get; set; }

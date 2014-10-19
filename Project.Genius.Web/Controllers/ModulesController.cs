@@ -3,10 +3,15 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Data.Entity;
+	using System.Data.Entity.Validation;
 	using System.Linq;
 	using System.Net;
 	using System.Threading.Tasks;
 	using System.Web.Mvc;
+
+	using Helpers;
+
+	using Microsoft.AspNet.Identity;
 
 	using Schema;
 	using Schema.Entities;
@@ -89,52 +94,58 @@
 			return this.PartialView("_Details", module);
 		}
 
-		public async Task<ActionResult> Edit(Guid? id)
-		{
-			if (id == null)
-			{
-				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-			}
-			Module module = await this.db.Modules.FindAsync(id);
-			if (module == null)
-			{
-				return this.HttpNotFound();
-			}
-			return View(module);
-		}
-
-		// POST: Modules/Edit/5
-		// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Edit([Bind(Include = "Id,Caption,Description,Name")] Module module)
-		{
-			if (this.ModelState.IsValid)
-			{
-				this.db.Entry(module).State = EntityState.Modified;
-				await this.db.SaveChangesAsync();
-				return this.RedirectToAction("Index");
-			}
-			return View(module);
-		}
-
 		public JsonResult GetTypes()
 		{
 			List<ModuleType> dbResult = this.db.ModuleTypes.ToList();
-			var types = (from type in dbResult select new { value = type.Id, text = type.Name });
+			var types = (dbResult.Select(type => new { value = type.Id, text = type.Name }));
 
 			return this.Json(types, JsonRequestBehavior.AllowGet);
 		}
 
 		public async Task<ActionResult> Index()
 		{
-			//var viewModel = new ModuleViewModel
-			//{
-			//	DefinedTask = await this.db.DefinedTasks.ToListAsync(),
-			//	Module = await this.db.Modules.ToListAsync()
-			//};
 			return this.View(await this.db.Modules.ToListAsync());
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> InlineEdit(string pk, string name, string value)
+		{
+			Module module = this.db.Modules.Find(new Guid(pk));
+			if (module == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest, string.Format("Resource not found"));
+			}
+
+			//switch (name.ToLower())
+			//{
+			//	case "caption":
+			//		module.Caption = value;
+			//		break;
+			//	case "description":
+			//		module.Description = value;
+			//		break;
+			//	case "type":
+			//		module.Type = this.db.ModuleTypes.Find(Convert.ToInt32(value));
+			//		break;
+			//}
+
+			try
+			{
+				Utilities.SetPropertyValue(module, name, value, this.db);
+				module.UpdateBy = this.db.ApplicationUsers.Find(this.User.Identity.GetUserId());
+				module.UpdateOn = DateTime.Now;
+
+				await this.db.SaveChangesAsync();
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
+			}
+			catch (DbEntityValidationException ex)
+			{
+				DbValidationError error = ex.EntityValidationErrors.First().ValidationErrors.First();
+				this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+				return new HttpStatusCodeResult(
+					HttpStatusCode.BadRequest,
+					string.Format("{0}: {1}", error.PropertyName, error.ErrorMessage));
+			}
 		}
 
 		#endregion
