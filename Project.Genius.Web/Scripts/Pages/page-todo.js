@@ -16,13 +16,27 @@ function activatEditableFunctions() {
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.showbuttons = false;
     $('.editable').editable();
-
-    var tasks = $('#moduleTasks')
-    .nestable()
-    .on('change', function() {
-        alert(window.JSON.stringify(tasks.nestable('serialize')));
-    });
 };
+
+function activateNestableFunctions() {
+    var tasks = $('#moduleTasks')
+        .nestable()
+        .on('change', function() {
+            var arrTask = [];
+
+            $.each(tasks.nestable('serialize'), function (key, value) {
+                arrTask.push(value.id);
+            });
+            var data = { 'tasks': arrTask };
+
+            $.ajax({
+                type: 'post',
+                contentType: 'application/json',
+                url: 'Modules/SortTasks',
+                data: JSON.stringify(data)
+        });
+    });
+}
 
 $(window).bind("resize", inboxWidthFunctions);
 

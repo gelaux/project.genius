@@ -9,7 +9,7 @@
     <div class="col-sm-3 tasks">
         <div class="task-list">
             <p>
-                @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success"} )
+                @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success" })
             </p>
             <div class="box">
                 <div class="box-header">
@@ -17,10 +17,15 @@
                         <i class="fa fa-list"></i>
                         Modules
                     </h2>
+                    <div class="box-icon">
+                        <a href="javascript:void(0);" class="success">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="box-content">
                     <div class="todo">
-                        <ul class="todo-list font-size-twelve">
+                        <ul class="todo-list">
                             @foreach (var module in Model)
                             {
                                 <li data-id="@module.Id">

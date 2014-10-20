@@ -18,6 +18,8 @@
 
 		public string Name { get; set; }
 
+		public int Order { get; set; }
+
 		public virtual ApplicationUser Owner { get; set; }
 
 		#endregion

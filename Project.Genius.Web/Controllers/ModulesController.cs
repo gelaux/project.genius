@@ -110,24 +110,17 @@
 		[HttpPost]
 		public async Task<ActionResult> InlineEdit(string pk, string name, string value)
 		{
+			var whitelist = new[] { "Caption", "Name", "Description", "Type", "Optional" };
+			if (Array.Exists(whitelist, e => e != name))
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+
 			Module module = this.db.Modules.Find(new Guid(pk));
 			if (module == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest, string.Format("Resource not found"));
 			}
-
-			//switch (name.ToLower())
-			//{
-			//	case "caption":
-			//		module.Caption = value;
-			//		break;
-			//	case "description":
-			//		module.Description = value;
-			//		break;
-			//	case "type":
-			//		module.Type = this.db.ModuleTypes.Find(Convert.ToInt32(value));
-			//		break;
-			//}
 
 			try
 			{
@@ -146,6 +139,18 @@
 					HttpStatusCode.BadRequest,
 					string.Format("{0}: {1}", error.PropertyName, error.ErrorMessage));
 			}
+		}
+
+		public async Task<ActionResult> SortTasks(string[] tasks)
+		{
+			for (int i = 0; i < tasks.Length; i++)
+			{
+				DefinedTask task = this.db.DefinedTasks.Find(new Guid(tasks[i]));
+				task.Order = i;
+				await this.db.SaveChangesAsync();
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
+			}
+			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
 
 		#endregion

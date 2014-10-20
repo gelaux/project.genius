@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201410190127249_AddedModuleRelatedTables.Designer.cs">
       <DependentUpon>201410190127249_AddedModuleRelatedTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410200341272_AddedOrderFieldOnDefinedTask.cs" />
+    <Compile Include="Migrations\201410200341272_AddedOrderFieldOnDefinedTask.Designer.cs">
+      <DependentUpon>201410200341272_AddedOrderFieldOnDefinedTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +86,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410190127249_AddedModuleRelatedTables.resx">
       <DependentUpon>201410190127249_AddedModuleRelatedTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410200341272_AddedOrderFieldOnDefinedTask.resx">
+      <DependentUpon>201410200341272_AddedOrderFieldOnDefinedTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,18 @@
 ﻿@using Project.Genius.Schema.Entities
 @model Module
 
-<h1>@Model.Name</h1>
+<h1>
+    <a href="javascript:void(0);"
+       class="editable"
+       data-type="text"
+       data-url="@Url.Action("InlineEdit", "Modules")"
+       data-name="Name"
+       data-pk="@Model.Id">@Model.Name</a>
+    <small class="pull-right">
+        <a href="#myModal" class="btn btn-sm btn-inverse" data-toggle="modal">New Task</a>
+    </small>
+</h1>
+
 <table class="table table-bordered modules">
     <tr>
         <th class="header">Caption</th>
@@ -54,28 +65,23 @@
     </tr>
 </table>
 
-<div class="well">
-    <div class="col-sm-6">
-        @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-sm btn-inverse" })
-    </div>
-    <div id="moduleTasks" class="dd">
-        <ol class="dd-list">
-            @foreach (var module in Model.Tasks)
-            {
-                <li class="dd-item dd3-item">
-                    <div class="dd-handle dd3-handle">
-                        <i class="fa fa-bars"></i>
-                    </div>
-                    <div class="dd3-content">@module.Name</div>
-                </li>
-            }
-        </ol>
-    </div>
-    <div class="clearfix"></div>
+<div id="moduleTasks" class="dd">
+    <ol class="dd-list">
+        @foreach (var task in Model.Tasks.OrderBy(t => t.Order))
+        {
+            <li class="dd-item dd3-item" data-id="@task.Id">
+                <div class="dd-handle dd3-handle">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="dd3-content">@task.Name</div>
+            </li>
+        }
+    </ol>
 </div>
 
 <script type="text/javascript">
     $(function () {
         activatEditableFunctions();
+        activateNestableFunctions();
     });
 </script>
