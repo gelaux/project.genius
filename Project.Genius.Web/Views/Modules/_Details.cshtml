@@ -9,7 +9,23 @@
        data-name="Name"
        data-pk="@Model.Id">@Model.Name</a>
     <small class="pull-right">
-        <a href="#myModal" class="btn btn-sm btn-inverse" data-toggle="modal">New Task</a>
+        @*<a href="#myModal" class="btn btn-sm btn-inverse" data-toggle="modal">New Task</a>*@
+        @Ajax.ActionLink(
+            "New Task",
+            "#myModal",
+            null,
+            null,
+            new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "modalBody"
+            },
+            new
+            {
+                @data_toggle = "modal",
+                @class="btn btn-sm btn-inverse"
+            })
     </small>
 </h1>
 

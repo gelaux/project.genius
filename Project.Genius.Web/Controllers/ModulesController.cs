@@ -39,8 +39,13 @@
 			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
 
-		// GET: Modules/Create
+		// GET: Modules/CreateTask
+		public ActionResult CreateTask()
+		{
+			return this.PartialView("_CreateTask", new DefinedTask());
+		}
 
+		// GET: Modules/Create
 		public ActionResult Create()
 		{
 			return this.View();
