@@ -16,6 +16,19 @@ function activatEditableFunctions() {
     $.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.showbuttons = false;
     $('.editable').editable();
+
+    var optional = $('#moduleOptional')
+        .on('change', function () {
+        $.ajax({
+            type: 'post',
+            url: optional.data('url'),
+            data: {
+                'pk': optional.data('pk'),
+                'name': optional.data('name'),
+                'value': optional.is(':checked')
+            }
+        });
+    });
 };
 
 function activateNestableFunctions() {
@@ -23,6 +36,7 @@ function activateNestableFunctions() {
         .nestable()
         .on('change', function() {
             var arrTask = [];
+            var url = tasks.data('arrange-url');
 
             $.each(tasks.nestable('serialize'), function (key, value) {
                 arrTask.push(value.id);
@@ -32,7 +46,7 @@ function activateNestableFunctions() {
             $.ajax({
                 type: 'post',
                 contentType: 'application/json',
-                url: 'Modules/SortTasks',
+                url: url,
                 data: JSON.stringify(data)
         });
     });

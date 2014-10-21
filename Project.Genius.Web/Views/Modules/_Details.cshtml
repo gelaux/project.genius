@@ -5,7 +5,7 @@
     <a href="javascript:void(0);"
        class="editable"
        data-type="text"
-       data-url="@Url.Action("InlineEdit", "Modules")"
+       data-url="@Url.Action("InlineEdit")"
        data-name="Name"
        data-pk="@Model.Id">@Model.Name</a>
     <small class="pull-right">
@@ -20,7 +20,7 @@
             <a href="javascript:void(0)"
                 class="editable"
                 data-type="text"
-                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-url="@Url.Action("InlineEdit")"
                 data-name="Caption"
                 data-pk="@Model.Id">@Model.Caption</a>
         </td>
@@ -31,7 +31,7 @@
             <a href="javascript:void(0)"
                 class="editable"
                 data-type="text"
-                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-url="@Url.Action("InlineEdit")"
                 data-name="Description"
                 data-pk="@Model.Id">@Model.Description</a>
         </td>
@@ -42,14 +42,22 @@
             <a href="javascript:void(0)"
                 class="editable"
                 data-type="select"
-                data-source="@Url.Action("GetTypes", "Modules")"
-                data-url="@Url.Action("InlineEdit", "Modules")"
+                data-source="@Url.Action("GetTypes")"
+                data-url="@Url.Action("InlineEdit")"
                 data-value="@Model.Type.Id"
                 data-name="Type"
                 data-pk="@Model.Id">@Model.Type.Name</a>
         </td>
         <th class="col-lg-1 col-sm-2">Optional</th>
-        <td class="col-sm-4">@Html.DisplayFor(model => model.Optional)</td>
+        <td class="col-sm-4">
+            @Html.CheckBoxFor(model => model.Optional,
+            new {
+                @id="moduleOptional",
+                @data_name="Optional",
+                @data_pk=@Model.Id,
+                @data_url=@Url.Action("InlineEdit")
+            })
+        </td>
     </tr>
     <tr>
         <th class="col-lg-1 col-sm-2">Created By</th>
@@ -65,7 +73,7 @@
     </tr>
 </table>
 
-<div id="moduleTasks" class="dd">
+<div id="moduleTasks" class="dd" data-arrange-url="@Url.Action("ArrangeTasks")">
     <ol class="dd-list">
         @foreach (var task in Model.Tasks.OrderBy(t => t.Order))
         {

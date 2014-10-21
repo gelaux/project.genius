@@ -24,9 +24,22 @@
 
 		#endregion
 
-		// GET: Modules/Create
-
 		#region Public Methods
+
+		[HttpPost]
+		public async Task<ActionResult> ArrangeTasks(string[] tasks)
+		{
+			for (int i = 0; i < tasks.Length; i++)
+			{
+				DefinedTask task = this.db.DefinedTasks.Find(new Guid(tasks[i]));
+				task.Order = i;
+				await this.db.SaveChangesAsync();
+				return new HttpStatusCodeResult(HttpStatusCode.OK);
+			}
+			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+		}
+
+		// GET: Modules/Create
 
 		public ActionResult Create()
 		{
@@ -111,7 +124,7 @@
 		public async Task<ActionResult> InlineEdit(string pk, string name, string value)
 		{
 			var whitelist = new[] { "Caption", "Name", "Description", "Type", "Optional" };
-			if (Array.Exists(whitelist, e => e != name))
+			if (!Array.Exists(whitelist, e => e == name))
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 			}
@@ -139,18 +152,6 @@
 					HttpStatusCode.BadRequest,
 					string.Format("{0}: {1}", error.PropertyName, error.ErrorMessage));
 			}
-		}
-
-		public async Task<ActionResult> SortTasks(string[] tasks)
-		{
-			for (int i = 0; i < tasks.Length; i++)
-			{
-				DefinedTask task = this.db.DefinedTasks.Find(new Guid(tasks[i]));
-				task.Order = i;
-				await this.db.SaveChangesAsync();
-				return new HttpStatusCodeResult(HttpStatusCode.OK);
-			}
-			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 		}
 
 		#endregion
