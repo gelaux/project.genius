@@ -29,21 +29,27 @@
 		[HttpPost]
 		public async Task<ActionResult> ArrangeTasks(string[] tasks)
 		{
-			for (int i = 0; i < tasks.Length; i++)
+			try
 			{
-				DefinedTask task = this.db.DefinedTasks.Find(new Guid(tasks[i]));
-				task.Order = i;
-				await this.db.SaveChangesAsync();
+				for (int i = 0; i < tasks.Length; i++)
+				{
+					DefinedTask task = this.db.DefinedTasks.Find(new Guid(tasks[i]));
+					task.Order = i;
+					await this.db.SaveChangesAsync();
+				}
 				return new HttpStatusCodeResult(HttpStatusCode.OK);
 			}
-			return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			catch (DbEntityValidationException ex)
+			{
+				DbValidationError error = ex.EntityValidationErrors.First().ValidationErrors.First();
+				this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+				return new HttpStatusCodeResult(
+					HttpStatusCode.BadRequest,
+					string.Format("{0}: {1}", error.PropertyName, error.ErrorMessage));
+			}
 		}
 
 		// GET: Modules/CreateTask
-		public ActionResult CreateTask()
-		{
-			return this.PartialView("_CreateTask", new DefinedTask());
-		}
 
 		// GET: Modules/Create
 		public ActionResult Create()
@@ -69,7 +75,39 @@
 			return View(module);
 		}
 
-		// GET: Modules/Edit/5
+		public async Task<ActionResult> CreateTask(string moduleId)
+		{
+			this.Response.CacheControl = "no-cache";
+			Module module = await this.db.Modules.FindAsync(new Guid(moduleId));
+			if (module == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest, string.Format("Resource not found"));
+			}
+
+			return this.PartialView("_CreateTask", new DefinedTask { Module = module });
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> CreateTask([Bind(Include = "Name,Duration,Module")] DefinedTask task)
+		{
+			if (this.ModelState.IsValid)
+			{
+				Module module = await this.db.Modules.FindAsync(task.Module.Id);
+
+				task.Id = Guid.NewGuid();
+				task.Module = module;
+				task.Order = module.Tasks.Count;
+				task.Owner = await this.db.ApplicationUsers.FindAsync(this.User.Identity.GetUserId());
+
+				this.db.DefinedTasks.Add(task);
+				await this.db.SaveChangesAsync();
+
+				return this.PartialView("_Tasks", module);
+			}
+
+			return View(task);
+		}
 
 		// GET: Modules/Delete/5
 		public async Task<ActionResult> Delete(Guid? id)
@@ -143,7 +181,7 @@
 			try
 			{
 				Utilities.SetPropertyValue(module, name, value, this.db);
-				module.UpdateBy = this.db.ApplicationUsers.Find(this.User.Identity.GetUserId());
+				module.UpdateBy = await this.db.ApplicationUsers.FindAsync(this.User.Identity.GetUserId());
 				module.UpdateOn = DateTime.Now;
 
 				await this.db.SaveChangesAsync();

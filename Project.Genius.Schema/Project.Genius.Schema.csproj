@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201410200341272_AddedOrderFieldOnDefinedTask.Designer.cs">
       <DependentUpon>201410200341272_AddedOrderFieldOnDefinedTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410230330257_TaskNameIsRequired.cs" />
+    <Compile Include="Migrations\201410230330257_TaskNameIsRequired.Designer.cs">
+      <DependentUpon>201410230330257_TaskNameIsRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410200341272_AddedOrderFieldOnDefinedTask.resx">
       <DependentUpon>201410200341272_AddedOrderFieldOnDefinedTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410230330257_TaskNameIsRequired.resx">
+      <DependentUpon>201410230330257_TaskNameIsRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

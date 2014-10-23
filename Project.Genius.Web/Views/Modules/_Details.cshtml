@@ -1,5 +1,4 @@
-﻿@using Project.Genius.Schema.Entities
-@model Module
+﻿@model Project.Genius.Schema.Entities.Module
 
 <h1>
     <a href="javascript:void(0);"
@@ -12,18 +11,16 @@
         @*<a href="#myModal" class="btn btn-sm btn-inverse" data-toggle="modal">New Task</a>*@
         @Ajax.ActionLink(
             "New Task",
-            "#myModal",
-            null,
-            null,
-            new AjaxOptions
+            "CreateTask",
+            new
             {
-                HttpMethod = "get",
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "modalBody"
+                moduleId = @Model.Id,
             },
+            null,
             new
             {
                 @data_toggle = "modal",
+                @data_target="#myModal",
                 @class="btn btn-sm btn-inverse"
             })
     </small>
@@ -89,18 +86,8 @@
     </tr>
 </table>
 
-<div id="moduleTasks" class="dd" data-arrange-url="@Url.Action("ArrangeTasks")">
-    <ol class="dd-list">
-        @foreach (var task in Model.Tasks.OrderBy(t => t.Order))
-        {
-            <li class="dd-item dd3-item" data-id="@task.Id">
-                <div class="dd-handle dd3-handle">
-                    <i class="fa fa-bars"></i>
-                </div>
-                <div class="dd3-content">@task.Name</div>
-            </li>
-        }
-    </ol>
+<div id="moduleTasksWrapper">
+    @Html.Partial("_Tasks")
 </div>
 
 <script type="text/javascript">

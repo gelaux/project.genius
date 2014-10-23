@@ -22,10 +22,6 @@
     padding: 15px 15px !important;
 }
 
-/*.editable-click {
-    border-bottom: none !important;
-}*/
-
 .editable-input > input {
     height: 20px !important;
     width: 250px !important;
@@ -39,4 +35,13 @@
 .form-control {
     padding: 0;
     font-size: 13px;
+    height: 28px;
+}
+
+.control-label {
+    padding-top: 5px !important;
+}
+
+.modal {
+    overflow-y: hidden;
 }

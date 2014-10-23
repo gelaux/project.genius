@@ -1,6 +1,7 @@
 ﻿namespace Project.Genius.Schema.Entities
 {
 	using System;
+	using System.ComponentModel.DataAnnotations;
 	using System.ComponentModel.DataAnnotations.Schema;
 
 	public class DefinedTask
@@ -16,6 +17,7 @@
 
 		public Module Module { get; set; }
 
+		[Required]
 		public string Name { get; set; }
 
 		public int Order { get; set; }

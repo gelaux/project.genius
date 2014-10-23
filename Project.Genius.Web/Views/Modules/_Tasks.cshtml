@@ -1,0 +1,15 @@
+﻿@model Project.Genius.Schema.Entities.Module
+
+<div id="moduleTasks" class="dd" data-arrange-url="@Url.Action("ArrangeTasks")">
+    <ol class="dd-list">
+        @foreach (var task in Model.Tasks.OrderBy(t => t.Order))
+        {
+            <li class="dd-item dd3-item" data-id="@task.Id">
+                <div class="dd-handle dd3-handle">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <div class="dd3-content">@task.Name</div>
+            </li>
+        }
+    </ol>
+</div>

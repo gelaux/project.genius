@@ -52,6 +52,10 @@ function activateNestableFunctions() {
     });
 }
 
+function closeDialog() {
+    $('#myModal').modal('hide');
+}
+
 $(window).bind("resize", inboxWidthFunctions);
 
 $(document).ready(function(){

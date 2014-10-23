@@ -318,6 +318,7 @@
     <Content Include="Views\Modules\Index.cshtml" />
     <Content Include="Views\Modules\_Details.cshtml" />
     <Content Include="Views\Modules\_CreateTask.cshtml" />
+    <Content Include="Views\Modules\_Tasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
