@@ -1,7 +1,5 @@
-﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapPathHelperModel
-@using System.Web.Mvc.Html
+﻿@model SiteMapPathHelperModel
 @using System.Linq
-@using MvcSiteMapProvider.Web.Html.Models
 
 <ol class="breadcrumb">
     @foreach (var node in Model.Nodes)
@@ -9,10 +7,7 @@
         if (node != Model.Last())
         {
             <li class=@(node.IsCurrentNode ? "active" : "")>
-                <a href=@node.Url>
-                    <i class="fa @node.Attributes["fa"].ToString()"></i>
-                    @node.Title
-                </a>
+                <a href=@node.Url>@node.Title</a>
             </li>
         }
         else

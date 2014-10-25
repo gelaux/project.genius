@@ -17,11 +17,6 @@
                         <i class="fa fa-list"></i>
                         Modules
                     </h2>
-                    <div class="box-icon">
-                        <a href="javascript:void(0);" class="success">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
                 </div>
                 <div class="box-content">
                     <div class="todo">
@@ -42,7 +37,8 @@
                                             new AjaxOptions {
                                                 HttpMethod = "get",
                                                 InsertionMode = InsertionMode.Replace,
-                                                UpdateTargetId = "moduleDetails"
+                                                UpdateTargetId = "moduleDetails",
+                                                OnSuccess = "inboxWidthFunctions"
                                             })
                                     </span>
                                     <span class="label label-info">@module.Type.Name</span>

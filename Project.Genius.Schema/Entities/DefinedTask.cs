@@ -15,7 +15,7 @@
 
 		public string Instruction { get; set; }
 
-		public Module Module { get; set; }
+		public virtual Module Module { get; set; }
 
 		[Required]
 		public string Name { get; set; }

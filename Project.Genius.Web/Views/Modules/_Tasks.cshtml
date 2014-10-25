@@ -1,6 +1,10 @@
 ﻿@model Project.Genius.Schema.Entities.Module
 
-<div id="moduleTasks" class="dd" data-arrange-url="@Url.Action("ArrangeTasks")">
+<div id="moduleTasks"
+     class="dd"
+     data-arrange-url="@Url.Action("ArrangeTasks")"
+     data-delete-url="@Url.Action("DeleteTask")">
+
     <ol class="dd-list">
         @foreach (var task in Model.Tasks.OrderBy(t => t.Order))
         {
@@ -8,8 +12,14 @@
                 <div class="dd-handle dd3-handle">
                     <i class="fa fa-bars"></i>
                 </div>
-                <div class="dd3-content">@task.Name</div>
+                <div class="dd3-content">
+                    @task.Name
+                    <a class="remove" href="@Url.Action("DeleteTask", new { @task.Id })" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
             </li>
         }
     </ol>
+
 </div>

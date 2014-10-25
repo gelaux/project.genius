@@ -5,7 +5,7 @@ function inboxWidthFunctions(e) {
 
 	if (winWidth > 767) {
 		if(tasksHeight < contentHeightOuter) {
-			$('.tasks').css('height',contentHeightOuter-40);
+			$('.tasks').css('min-height',contentHeightOuter-40);
 		}
 	} else {
 		
@@ -54,6 +54,26 @@ function activateNestableFunctions() {
 
 function closeDialog() {
     $('#myModal').modal('hide');
+    activateNestableFunctions();
+}
+
+function removeTask() {
+    $('#mySmallModal').modal('hide');
+}
+
+function activateTasksFunctions() {
+    $('.dd-item').click(function () {
+        alert($(this).data('id'));
+    });
+
+    /* ---------- Nestable Remove Button ---------- */
+    $(".remove").click(function () {
+        var task = $(this).parent().parent();
+        var url = task.data('delete-url');
+
+        task.remove();
+        return false;
+    });
 }
 
 $(window).bind("resize", inboxWidthFunctions);

@@ -22,6 +22,14 @@
     padding: 15px 15px !important;
 }
 
+/*.inbox .message,
+.inbox .messages {
+    margin: -30px 0 -30px 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    content: "";
+}*/
+
 .editable-input > input {
     height: 20px !important;
     width: 250px !important;
@@ -44,4 +52,15 @@
 
 .modal {
     overflow-y: hidden;
+}
+
+.modal-footer {
+    margin-top: -15px;
+}
+
+ol li .remove {
+    /*display: none;*/
+    position: absolute;
+    right: 10px;
+    color: #b2b8bd;
 }

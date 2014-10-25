@@ -8,13 +8,12 @@
        data-name="Name"
        data-pk="@Model.Id">@Model.Name</a>
     <small class="pull-right">
-        @*<a href="#myModal" class="btn btn-sm btn-inverse" data-toggle="modal">New Task</a>*@
         @Ajax.ActionLink(
             "New Task",
             "CreateTask",
             new
             {
-                moduleId = @Model.Id,
+                moduleId = @Model.Id
             },
             null,
             new
@@ -94,5 +93,6 @@
     $(function () {
         activatEditableFunctions();
         activateNestableFunctions();
+        //activateTasksFunctions();
     });
 </script>

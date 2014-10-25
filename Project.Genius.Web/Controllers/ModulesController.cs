@@ -49,8 +49,6 @@
 			}
 		}
 
-		// GET: Modules/CreateTask
-
 		// GET: Modules/Create
 		public ActionResult Create()
 		{
@@ -106,7 +104,43 @@
 				return this.PartialView("_Tasks", module);
 			}
 
-			return View(task);
+			return this.PartialView("_Tasks");
+		}
+
+		// GET: Modules/Delete/5
+		public async Task<ActionResult> DeleteTask(Guid? id)
+		{
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			DefinedTask task = await this.db.DefinedTasks.FindAsync(id);
+			if (task == null)
+			{
+				return this.HttpNotFound();
+			}
+			return this.PartialView("_DeleteTask", task);
+		}
+
+		// POST: Modules/Delete/5
+		[HttpPost]
+		[ActionName("DeleteTask")]
+		[ValidateAntiForgeryToken]
+		public async Task<ActionResult> DeleteTaskConfirmed(Guid id)
+		{
+			DefinedTask task = await this.db.DefinedTasks.FindAsync(id);
+			Module module = await this.db.Modules.FindAsync(task.Module.Id);
+
+			this.db.DefinedTasks.Remove(task);
+
+			var i = 0;
+			foreach (var x in module.Tasks.OrderBy(x => x.Order))
+			{
+				x.Order = i++;
+			}
+
+			await this.db.SaveChangesAsync();
+			return this.PartialView("_Tasks", module);
 		}
 
 		// GET: Modules/Delete/5
