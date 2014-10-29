@@ -1,0 +1,48 @@
+﻿@model Project.Genius.Web.ViewModels.ModuleViewModels
+
+<div class="task-list">
+    <p>
+        @Html.ActionLink("+Versions", "Create", "Module", new { @class = "btn btn-success" })
+    </p>
+    <div class="box">
+        <div class="box-header">
+            <h2>
+                <i class="fa fa-list"></i>
+                Versions
+            </h2>
+        </div>
+        <div class="box-content">
+            <div class="todo">
+                <ul class="todo-list">
+                    @foreach (var version in Model.ProductVersions)
+                    {
+                        <li data-id="@version.Id">
+                            <span class="todo-actions">
+                                <i class="fa fa-list-alt"></i>
+                            </span>
+                            <span class="desc">
+                                @Ajax.ActionLink(
+                                    @version.Name,
+                                    "Details",
+                                    new
+                                    {
+                                        id = @version.Id
+                                    },
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "get",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "moduleDetails",
+                                        OnSuccess = "inboxWidthFunctions"
+                                    })
+                            </span>
+                            <a class="remove" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

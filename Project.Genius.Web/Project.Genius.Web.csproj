@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="ViewModels\CreateModuleViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModulesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -181,6 +182,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ModuleViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-editable.css" />
@@ -312,7 +314,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MenuLeftHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathBreadcrumbHelperModel.cshtml" />
-    <Content Include="Views\Modules\Create.cshtml" />
+    <Content Include="Views\Modules\_Create.cshtml" />
     <Content Include="Views\Modules\Delete.cshtml" />
     <Content Include="Views\Modules\Edit.cshtml" />
     <Content Include="Views\Modules\Index.cshtml" />
@@ -320,6 +322,9 @@
     <Content Include="Views\Modules\_CreateTask.cshtml" />
     <Content Include="Views\Modules\_Tasks.cshtml" />
     <Content Include="Views\Modules\_DeleteTask.cshtml" />
+    <Content Include="Views\Modules\_Modules.cshtml" />
+    <Content Include="Views\Modules\_ModuleTypes.cshtml" />
+    <Content Include="Views\Modules\_ProductVersions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

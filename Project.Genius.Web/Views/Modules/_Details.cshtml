@@ -1,92 +1,95 @@
 ﻿@model Project.Genius.Schema.Entities.Module
 
-<h1>
-    <a href="javascript:void(0);"
-       class="editable"
-       data-type="text"
-       data-url="@Url.Action("InlineEdit")"
-       data-name="Name"
-       data-pk="@Model.Id">@Model.Name</a>
-    <small class="pull-right">
-        @Ajax.ActionLink(
-            "New Task",
-            "CreateTask",
+<div class="task-list">
+    <h1>
+        <a href="javascript:void(0);"
+           class="editable"
+           data-type="text"
+           data-url="@Url.Action("InlineEdit")"
+           data-name="Name"
+           data-pk="@Model.Id">@Model.Name</a>
+        <small class="pull-right">
+            @Ajax.ActionLink(
+                "New Task",
+                "CreateTask",
+                new
+                {
+                    moduleId = @Model.Id
+                },
+                null,
+                new
+                {
+                    @data_toggle = "modal",
+                    @data_target = "#myModal",
+                    @class = "btn btn-sm btn-inverse"
+                })
+        </small>
+    </h1>
+
+    <table class="table table-bordered modules">
+        <tr>
+            <th class="header">Caption</th>
+            <td colspan="4">
+                <a href="javascript:void(0)"
+                   class="editable"
+                   data-type="text"
+                   data-url="@Url.Action("InlineEdit")"
+                   data-name="Caption"
+                   data-pk="@Model.Id">@Model.Caption</a>
+            </td>
+        </tr>
+        <tr>
+            <th class="header">Description</th>
+            <td colspan="4">
+                <a href="javascript:void(0)"
+                   class="editable"
+                   data-type="text"
+                   data-url="@Url.Action("InlineEdit")"
+                   data-name="Description"
+                   data-pk="@Model.Id">@Model.Description</a>
+            </td>
+        </tr>
+        <tr>
+            <th class="col-lg-1 col-sm-2">Type</th>
+            <td class="col-sm-4">
+                <a href="javascript:void(0)"
+                   class="editable"
+                   data-type="select"
+                   data-source="@Url.Action("GetTypes")"
+                   data-url="@Url.Action("InlineEdit")"
+                   data-value="@Model.Type.Id"
+                   data-name="Type"
+                   data-pk="@Model.Id">@Model.Type.Name</a>
+            </td>
+            <th class="col-lg-1 col-sm-2">Optional</th>
+            <td class="col-sm-4">
+                @Html.CheckBoxFor(model => model.Optional,
             new
             {
-                moduleId = @Model.Id
-            },
-            null,
-            new
-            {
-                @data_toggle = "modal",
-                @data_target="#myModal",
-                @class="btn btn-sm btn-inverse"
+                @id = "moduleOptional",
+                @data_name = "Optional",
+                @data_pk = @Model.Id,
+                @data_url = @Url.Action("InlineEdit")
             })
-    </small>
-</h1>
+            </td>
+        </tr>
+        <tr>
+            <th class="col-lg-1 col-sm-2">Created By</th>
+            <td class="col-sm-4">@Model.CreateBy.DisplayName</td>
+            <th class="col-lg-1 col-sm-2">Created On</th>
+            <td class="col-sm-4">@Model.CreatedOn</td>
+        </tr>
+        <tr>
+            <th class="col-lg-1 col-sm-2">Updated By</th>
+            <td class="col-sm-4">@Model.UpdateBy.DisplayName</td>
+            <th class="col-lg-1 col-sm-2">Updated On</th>
+            <td class="col-sm-4">@Model.UpdateOn</td>
+        </tr>
+    </table>
 
-<table class="table table-bordered modules">
-    <tr>
-        <th class="header">Caption</th>
-        <td colspan="4">
-            <a href="javascript:void(0)"
-                class="editable"
-                data-type="text"
-                data-url="@Url.Action("InlineEdit")"
-                data-name="Caption"
-                data-pk="@Model.Id">@Model.Caption</a>
-        </td>
-    </tr>
-    <tr>
-        <th class="header">Description</th>
-        <td colspan="4">
-            <a href="javascript:void(0)"
-                class="editable"
-                data-type="text"
-                data-url="@Url.Action("InlineEdit")"
-                data-name="Description"
-                data-pk="@Model.Id">@Model.Description</a>
-        </td>
-    </tr>
-    <tr>
-        <th class="col-lg-1 col-sm-2">Type</th>
-        <td class="col-sm-4">
-            <a href="javascript:void(0)"
-                class="editable"
-                data-type="select"
-                data-source="@Url.Action("GetTypes")"
-                data-url="@Url.Action("InlineEdit")"
-                data-value="@Model.Type.Id"
-                data-name="Type"
-                data-pk="@Model.Id">@Model.Type.Name</a>
-        </td>
-        <th class="col-lg-1 col-sm-2">Optional</th>
-        <td class="col-sm-4">
-            @Html.CheckBoxFor(model => model.Optional,
-            new {
-                @id="moduleOptional",
-                @data_name="Optional",
-                @data_pk=@Model.Id,
-                @data_url=@Url.Action("InlineEdit")
-            })
-        </td>
-    </tr>
-    <tr>
-        <th class="col-lg-1 col-sm-2">Created By</th>
-        <td class="col-sm-4">@Model.CreateBy.DisplayName</td>
-        <th class="col-lg-1 col-sm-2">Created On</th>
-        <td class="col-sm-4">@Model.CreatedOn</td>
-    </tr>
-    <tr>
-        <th class="col-lg-1 col-sm-2">Updated By</th>
-        <td class="col-sm-4">@Model.UpdateBy.DisplayName</td>
-        <th class="col-lg-1 col-sm-2">Updated On</th>
-        <td class="col-sm-4">@Model.UpdateOn</td>
-    </tr>
-</table>
-
-<div id="moduleTasksWrapper">
-    @Html.Partial("_Tasks")
+    <div id="moduleTasksWrapper">
+        @Html.Partial("_Tasks")
+    </div>
 </div>
 
 <script type="text/javascript">

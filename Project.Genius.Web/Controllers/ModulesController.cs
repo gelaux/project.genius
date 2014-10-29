@@ -16,6 +16,8 @@
 	using Schema;
 	using Schema.Entities;
 
+	using ViewModels;
+
 	public class ModulesController : Controller
 	{
 		#region Constants and Fields
@@ -52,7 +54,8 @@
 		// GET: Modules/Create
 		public ActionResult Create()
 		{
-			return this.View();
+			var viewModel = new CreateModuleViewModel { ModuleTypes = this.db.ModuleTypes.ToList()};
+			return this.PartialView("_Create", viewModel);
 		}
 
 		// POST: Modules/Create
@@ -60,23 +63,36 @@
 		// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<ActionResult> Create([Bind(Include = "Id,Caption,Description,Name")] Module module)
+		public async Task<ActionResult> Create([Bind(Include = "Name,Description,Type")] Module module)
 		{
 			if (this.ModelState.IsValid)
 			{
+				var selectedType = await this.db.ModuleTypes.FindAsync(module.Type.Id);
+				var currentUser = await this.db.ApplicationUsers.FindAsync(this.User.Identity.GetUserId());
+				var currentTime = DateTime.Now;
+
 				module.Id = Guid.NewGuid();
+				module.Type = selectedType;
+				module.Caption = module.Name;
+				module.CreateBy = currentUser;
+				module.CreatedOn = currentTime;
+				module.UpdateBy = currentUser;
+				module.UpdateOn = currentTime;
+
 				this.db.Modules.Add(module);
 				await this.db.SaveChangesAsync();
-				return this.RedirectToAction("Index");
+
+				var viewModel = new ModuleViewModels { Modules = await this.db.Modules.ToListAsync() };
+
+				return this.PartialView("_Modules", viewModel); ;
 			}
 
 			return View(module);
 		}
 
-		public async Task<ActionResult> CreateTask(string moduleId)
+		public async Task<ActionResult> CreateTask(Guid? moduleId)
 		{
-			this.Response.CacheControl = "no-cache";
-			Module module = await this.db.Modules.FindAsync(new Guid(moduleId));
+			Module module = await this.db.Modules.FindAsync(moduleId);
 			if (module == null)
 			{
 				return new HttpStatusCodeResult(HttpStatusCode.BadRequest, string.Format("Resource not found"));
@@ -194,7 +210,13 @@
 
 		public async Task<ActionResult> Index()
 		{
-			return this.View(await this.db.Modules.ToListAsync());
+			var viewModel = new ModuleViewModels
+			{
+				Modules = await this.db.Modules.ToListAsync(),
+				ModuleTypes = await this.db.ModuleTypes.ToListAsync(),
+				ProductVersions = await this.db.ProductVersions.ToListAsync()
+			};
+			return this.View(viewModel);
 		}
 
 		[HttpPost]

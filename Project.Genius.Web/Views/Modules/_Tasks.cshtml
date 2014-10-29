@@ -13,7 +13,7 @@
                     <i class="fa fa-bars"></i>
                 </div>
                 <div class="dd3-content">
-                    @task.Name
+                    @Ajax.ActionLink(@task.Name, "TaskDetails", new { @task.Id }, null)
                     <a class="remove" href="@Url.Action("DeleteTask", new { @task.Id })" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-times"></i>
                     </a>

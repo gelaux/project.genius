@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Project.Genius.Schema.Entities.Module>
+﻿@model Project.Genius.Web.ViewModels.ModuleViewModels
 
 @{
     ViewBag.Title = "Index";
@@ -6,59 +6,17 @@
 }
 
 <div class="row page-todo">
-    <div class="col-sm-3 tasks">
-        <div class="task-list">
-            <p>
-                @Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success" })
-            </p>
-            <div class="box">
-                <div class="box-header">
-                    <h2>
-                        <i class="fa fa-list"></i>
-                        Modules
-                    </h2>
-                </div>
-                <div class="box-content">
-                    <div class="todo">
-                        <ul class="todo-list">
-                            @foreach (var module in Model)
-                            {
-                                <li data-id="@module.Id">
-                                    <span class="todo-actions">
-                                        <i class="fa fa-list-alt"></i>
-                                    </span>
-                                    <span class="desc">
-                                        @Ajax.ActionLink(
-                                            @module.Name,
-                                            "Details",
-                                            new {
-                                                id = @module.Id
-                                            },
-                                            new AjaxOptions {
-                                                HttpMethod = "get",
-                                                InsertionMode = InsertionMode.Replace,
-                                                UpdateTargetId = "moduleDetails",
-                                                OnSuccess = "inboxWidthFunctions"
-                                            })
-                                    </span>
-                                    <span class="label label-info">@module.Type.Name</span>
-                                    <a class="remove" href="#">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="col-lg-3 col-md-4 col-sm-12 tasks" id="modules">
+        @Html.Partial("_Modules")
     </div>
-    <div class="col-sm-9 tasks">
-        <div class="task-list">
-            <div id="moduleDetails">
-                @*@Html.Partial("_Details", Model)*@
-            </div>
-        </div>
+    <div class="col-lg-3 col-md-4 col-sm-12 tasks" id="moduleTypes">
+        @Html.Partial("_ModuleTypes")
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-12 tasks" id="productVersions">
+        @Html.Partial("_ProductVersions")
+    </div>
+    <div class="col-md-8 col-lg-9 tasks" id="detailsWrapper" style="display: none;">
+        @* Details goes here *@
     </div>
 </div>
 

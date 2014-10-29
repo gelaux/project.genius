@@ -1,0 +1,60 @@
+﻿@model Project.Genius.Web.ViewModels.ModuleViewModels
+
+<div class="task-list">
+    <p>
+        @*@Html.ActionLink("+Module", "Create", "Module", new { @class = "btn btn-success" })*@
+        @Ajax.ActionLink(
+            "+Module",
+            "Create",
+            null,
+            null,
+            new
+            {
+                @data_toggle = "modal",
+                @data_target = "#myModal",
+                @class = "btn btn-success"
+            })
+    </p>
+    <div class="box">
+        <div class="box-header">
+            <h2>
+                <i class="fa fa-list"></i>
+                Modules
+            </h2>
+        </div>
+        <div class="box-content">
+            <div class="todo">
+                <ul class="todo-list">
+                    @foreach (var module in Model.Modules)
+                    {
+                        <li data-id="@module.Id">
+                            <span class="todo-actions">
+                                <i class="fa fa-list-alt"></i>
+                            </span>
+                            <span class="desc">
+                                @Ajax.ActionLink(
+                                    @module.Name,
+                                    "Details",
+                                    new
+                                    {
+                                        id = @module.Id
+                                    },
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "get",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "detailsWrapper",
+                                        OnSuccess = "showModuleDetails"
+                                    })
+                            </span>
+                            <span class="label label-info">@module.Type.Name</span>
+                            <a class="remove" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

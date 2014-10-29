@@ -57,23 +57,17 @@ function closeDialog() {
     activateNestableFunctions();
 }
 
-function removeTask() {
-    $('#mySmallModal').modal('hide');
-}
-
 function activateTasksFunctions() {
     $('.dd-item').click(function () {
         alert($(this).data('id'));
     });
+}
 
-    /* ---------- Nestable Remove Button ---------- */
-    $(".remove").click(function () {
-        var task = $(this).parent().parent();
-        var url = task.data('delete-url');
-
-        task.remove();
-        return false;
-    });
+function showModuleDetails() {
+    inboxWidthFunctions();
+    $('#moduleTypes').hide();
+    $('#productVersions').hide();
+    $('#detailsWrapper').show();
 }
 
 $(window).bind("resize", inboxWidthFunctions);
